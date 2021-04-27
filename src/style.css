@@ -1,0 +1,156 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+@font-face {
+  font-family: "sega";
+  src: url("./components/font/SEGA.TTF");
+}
+body {
+  background-color: #2c5a8b;
+}
+.main {
+  width: 100vw;
+  height: auto;
+  /* background-color: #38618c; */
+  padding: 50px 0;
+}
+.title {
+  text-align: center;
+  color: #46adfc;
+  font-family: "sega";
+  font-weight: 400;
+  font-size: 3rem;
+}
+
+.search-bar {
+  border: none;
+  outline: none;
+  background-color: #81c2f3;
+  margin: 50px auto;
+  display: block;
+  width: 250px;
+  height: 3rem;
+  text-align: center;
+  color: #092e55;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+.search-bar::placeholder {
+  color: #29527e;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.friend-card-container {
+  width: 100vw;
+  display: flex;
+  flex-wrap: wrap;
+  /* padding: 100px 0; */
+  justify-content: center;
+}
+.friend-image {
+  width: 100%;
+  /* border: 1px solid red; */
+  /* background-color: #2b9ef7; */
+}
+.friend-card--size {
+  width: 300px;
+  text-align: center;
+  padding: 20px;
+}
+.friend-card-full {
+  width: 60%;
+  margin: 50px auto !important;
+  display: flex;
+  justify-content: center;
+  padding: 50px 0;
+  /* border: 1px solid red; */
+  /* align-items: center; */
+}
+.friend-card-full p {
+  margin: 5px 0;
+}
+/* .friend-card-full-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: stretch;
+} */
+.friend-card {
+  background-color: #259df8;
+  margin: 20px;
+  border-radius: 10px;
+  color: #092e55;
+  box-shadow: 0px 0px 20px 0px #092e55;
+  font-family: sans-serif;
+}
+.friend-card:hover {
+  transition: all 0.3s ease;
+  transform: scale(1.05);
+  background-color: #f7f317;
+}
+.friend-name,
+.friend-email {
+  margin: 5px 0px;
+  font-family: sans-serif;
+}
+.friend-full-info-link:link,
+.friend-full-info-link:visited {
+  font-family: sans-serif;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #092e55;
+  font-weight: 600;
+  display: inline-block;
+  /* width: 50%; */
+  margin-top: 10px;
+  font-size: 1rem;
+  border: 2px solid #092e55;
+  /* background-color: #f7f317; */
+  padding: 5px 10px;
+}
+
+.friend-card:hover .friend-full-info-link {
+  transition: all 0.4s ease;
+  background-color: #092e55;
+  color: white;
+}
+
+@media screen and (max-width: 1100px) {
+  .friend-card-full {
+    width: 60%;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .friend-card-full {
+    font-size: 0.8rem;
+    width: 90%;
+  }
+  .friend-card--size {
+    width: 200px;
+    font-size: 0.7rem;
+  }
+  .friend-full-info-link:link,
+  .friend-full-info-link:visited {
+    font-size: 0.7rem;
+  }
+  .title {
+    font-size: 2rem;
+
+    /* line-height: 1rem; */
+  }
+}
+@media screen and (max-width: 490px) {
+  .friend-card--size {
+    width: 150px;
+    font-size: 0.7rem;
+  }
+}
