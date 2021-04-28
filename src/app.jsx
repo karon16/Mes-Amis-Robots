@@ -11,20 +11,21 @@ const App = () => {
   const [loading, setLoadinng] = useState(false);
   const location = useLocation();
   let [friendsTampon, setFiendsTampon] = useState(friends);
+  const [friendFullInfo, setFriendFullInfo] = useState([]);
 
   useEffect(() => {
     setLoadinng(true);
     fetch("https://jsonplaceholder.typicode.com/users")
       .then((response) => response.json())
       .then((data) => {
-        // const friendFullData = data;
+        const friendFullData = data;
         const fiteredData = data.map(({ id, name, email }) => {
           return { id, name, email };
         });
         setLoadinng(false);
         setFiends(fiteredData);
         setFiendsTampon(fiteredData);
-        // setFriendFullInfo(friendFullData);
+        setFriendFullInfo(friendFullData);
       });
   }, []);
 
@@ -35,29 +36,40 @@ const App = () => {
     });
     setFiendsTampon(filteredFriendsList);
   };
-
-  const RenderCardList = () => {
-    return <CardList robotFriendList={friendsTampon} />;
-  };
-
+  console.log();
   return (
     <div className="main">
       {loading ? (
         <LoadingAnimation />
       ) : (
         <>
-          <h1 className="title">Mes Amis Robots</h1>
           {location.pathname === "/" && (
-            <InputField
-              type="search"
-              placeholder="Rechercher par Noms"
-              id="recherhe"
-              handleChange={handleChange}
-            />
+            <>
+              <h1 className="title">Mes Amis Robots</h1>
+
+              <InputField
+                type="search"
+                placeholder="Rechercher par Noms"
+                id="recherhe"
+                handleChange={handleChange}
+              />
+            </>
           )}
           <Switch>
-            <Route exact path="/" component={RenderCardList} />
-            <Route path="/robot/:id" component={RobotFullInfo} />
+            <Route
+              exact
+              path="/"
+              render={() => <CardList robotFriendList={friendsTampon} />}
+            />
+            <Route
+              path="/robot/:id"
+              render={({ match }) => (
+                <RobotFullInfo
+                  robotFriendFullInfo={friendFullInfo}
+                  match={match}
+                />
+              )}
+            />
           </Switch>
         </>
       )}

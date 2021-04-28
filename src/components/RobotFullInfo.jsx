@@ -1,45 +1,32 @@
-import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import Loading from "./loading/loading";
+import LoadingAnimation from "./loading/loading";
 
 const RobotFullInfo = (props) => {
-  let [friendsFullInfo, setFriendFullInfo] = useState([]);
-
-  useEffect(function () {
-    fetch("http://jsonplaceholder.typicode.com/users")
-      .then(function (result) {
-        return result.json();
-      })
-      .then(function (data) {
-        const friendsData = data.map((robotPersonal) => {
-          return {
-            id: robotPersonal.id,
-            name: robotPersonal.name,
-            username: robotPersonal.username,
-            email: robotPersonal.email,
-            street: robotPersonal.address.street,
-            city: robotPersonal.address.city,
-            zipcode: robotPersonal.address.zipcode,
-            phone: robotPersonal.phone,
-            website: robotPersonal.website,
-            companyName: robotPersonal.company.name,
-            companyCatchPhrase: robotPersonal.company.CatchPhrase,
-            companyBs: robotPersonal.company.bs,
-          };
-        });
-        setFriendFullInfo(friendsData);
-      });
-  }, []);
+  const friendsData = props.robotFriendFullInfo.map((robotPersonal) => {
+    return {
+      id: robotPersonal.id,
+      name: robotPersonal.name,
+      username: robotPersonal.username,
+      email: robotPersonal.email,
+      street: robotPersonal.address.street,
+      city: robotPersonal.address.city,
+      zipcode: robotPersonal.address.zipcode,
+      phone: robotPersonal.phone,
+      website: robotPersonal.website,
+      companyName: robotPersonal.company.name,
+      companyCatchPhrase: robotPersonal.company.CatchPhrase,
+      companyBs: robotPersonal.company.bs,
+    };
+  });
 
   const getById = () => {
-    return friendsFullInfo.find((friend) => {
-      //   console.log(typeof props.match.params.id);
+    return friendsData.find((friend) => {
       return friend.id === Number(props.match.params.id);
     });
   };
 
-  if (friendsFullInfo.length === 0) {
-    return <Loading />;
+  if (friendsData.length === 0) {
+    return <LoadingAnimation />;
   } else {
     return (
       <div className="friend-card friend-card-full">
