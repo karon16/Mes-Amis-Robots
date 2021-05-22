@@ -11,9 +11,8 @@ const CardList = (props) => {
             id={id}
             names={name}
             alternative={`Mon ami ${name}`}
-            url={`https://robohash.org/${id + 10}`}
+            url={`https://robohash.org/${id}`}
             email={email}
-            /*viewFullContact={props.viewFullContact}*/
           />
         );
       })}

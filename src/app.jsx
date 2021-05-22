@@ -3,14 +3,14 @@ import { Route, Switch, useLocation } from "react-router-dom";
 import InputField from "./components/InputField";
 import LoadingAnimation from "./components/loading/loading";
 import CardList from "./components/CardList";
-import RobotFullInfo from "./components/RobotFullInfo";
+import RobotExplicitInfoCard from "./components/RobotExplicitInfoCard";
 import "./style.css";
 
 const App = () => {
   const [friends, setFiends] = useState([]);
   const [loading, setLoadinng] = useState(false);
   const location = useLocation();
-  let [friendsTampon, setFiendsTampon] = useState(friends);
+  const [friendsBuffer, setFiendsBuffer] = useState(friends);
   const [friendFullInfo, setFriendFullInfo] = useState([]);
 
   useEffect(() => {
@@ -24,7 +24,7 @@ const App = () => {
         });
         setLoadinng(false);
         setFiends(fiteredData);
-        setFiendsTampon(fiteredData);
+        setFiendsBuffer(fiteredData);
         setFriendFullInfo(friendFullData);
       });
   }, []);
@@ -34,9 +34,8 @@ const App = () => {
     const filteredFriendsList = friends.filter((friend) => {
       return friend.name.toLowerCase().includes(e.target.value.toLowerCase());
     });
-    setFiendsTampon(filteredFriendsList);
+    setFiendsBuffer(filteredFriendsList);
   };
-  console.log();
   return (
     <div className="main">
       {loading ? (
@@ -47,29 +46,12 @@ const App = () => {
             <>
               <h1 className="title">Mes Amis Robots</h1>
 
-              <InputField
-                type="search"
-                placeholder="Rechercher par Noms"
-                id="recherhe"
-                handleChange={handleChange}
-              />
+              <InputField type="search" placeholder="Rechercher par Noms" id="recherhe" handleChange={handleChange} />
             </>
           )}
           <Switch>
-            <Route
-              exact
-              path="/"
-              render={() => <CardList robotFriendList={friendsTampon} />}
-            />
-            <Route
-              path="/robot/:id"
-              render={({ match }) => (
-                <RobotFullInfo
-                  robotFriendFullInfo={friendFullInfo}
-                  match={match}
-                />
-              )}
-            />
+            <Route exact path="/" render={() => <CardList robotFriendList={friendsBuffer} />} />
+            <Route path="/robot/:id" render={({ match }) => <RobotExplicitInfoCard robotFriendFullInfo={friendFullInfo} match={match} />} />
           </Switch>
         </>
       )}

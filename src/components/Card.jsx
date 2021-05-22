@@ -2,9 +2,7 @@ import { Link } from "react-router-dom";
 
 const Card = (props) => {
   return (
-    <div
-      className="friend-card friend-card--size" /*onClick={props.viewFullContact}*/
-    >
+    <div className="friend-card friend-card--size">
       <div>
         <img className="friend-image" src={props.url} alt={props.alternative} />
       </div>
